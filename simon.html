@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        input {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #FFD700;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #FFC107;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .delete {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .delete:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h2>Interactive List</h2>
+    <div class="container">
+        <input type="text" placeholder="Enter item...">
+        <button>Add</button>
+        <ul></ul>
+    </div>
+
+    <script>
+        let btn = document.querySelector("button");
+        let ul = document.querySelector("ul");
+        let inp = document.querySelector("input");
+
+        btn.addEventListener("click", function () {
+            if (inp.value.trim() === "") return; // Prevent empty input
+            
+            let item = document.createElement("li");
+            item.innerText = inp.value;
+            
+            let delBtn = document.createElement("button");
+            delBtn.innerText = "Delete";
+            delBtn.classList.add("delete");
+            
+            item.appendChild(delBtn);
+            ul.appendChild(item);
+            inp.value = "";
+        });
+
+        ul.addEventListener("click", function (event) {
+            if (event.target.classList.contains("delete")) {
+                event.target.parentElement.remove();
+                console.log("Deleted item");
+            }
+        });
+    </script>
+</body>
+</html>
